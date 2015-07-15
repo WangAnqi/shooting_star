@@ -25,7 +25,7 @@ tmps.display(world);
 
 void draw()
 {
-background(255,255,255);
+background(61,51,149);
 world.step();
 world.draw();
 }
