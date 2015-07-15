@@ -13,6 +13,8 @@ Fisica.init(this);
 world = new FWorld();
 
 tuioClient  = new TuioProcessing(this);
+
+//init Monster/BlackHole/Star, then add them into world
 tmph = new Monster(0,80,80,10,10,0);
 tmph.display(world);
 
@@ -30,6 +32,7 @@ world.step();
 world.draw();
 }
 
+//press any key then you will see the star is toggled
 void keyPressed(){
   if(tmps.state == true){
      tmps.dark();
