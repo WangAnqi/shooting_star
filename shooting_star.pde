@@ -1,17 +1,40 @@
 import fisica.*;
 
 TuioProcessing tuioClient;
-Hunter tmph;
-
+Monster tmph;
+BlackHole tmpb;
+FWorld world;
+Star tmps;
 void setup()
 {
-size(displayWidth, displayHeight,P2D);
+//size(displayWidth, displayHeight,P2D);
+size(800, 600);
+Fisica.init(this);
+world = new FWorld();
+
 tuioClient  = new TuioProcessing(this);
-tmph = new Hunter(0,80,80,10,10,0);
+tmph = new Monster(0,80,80,10,10,0);
+tmph.display(world);
+
+tmpb = new BlackHole(0,80,80,10,10,0);
+tmpb.display(world);
+
+tmps = new Star(false,0,80,80,10,10,0);
+tmps.display(world);
 }
 
 void draw()
 {
-background(0,0,0);
-tmph.display();
+background(255,255,255);
+world.step();
+world.draw();
+}
+
+void keyPressed(){
+  if(tmps.state == true){
+     tmps.dark();
+  }
+  else{
+     tmps.light();
+  }
 }

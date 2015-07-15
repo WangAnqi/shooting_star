@@ -1,26 +1,58 @@
 import fisica.*;
-
+color starLightColor = #FFF812;
+color starDarkColor = #A09D3A;
 public class Star extends Object
 {
-  FBody k;
+  FPoly starPoly;
   color cl;
   boolean state;
-  Star(color c,boolean s, int a, float x, float y, float dx, float dy, float theta){
+  Star(boolean s, int a, float x, float y, float dx, float dy, float theta){
     super(a,x,y,dx,dy,theta);
-    cl = c;
     state = s;
+    if(state){
+       cl = starLightColor;
+    }
+    else{
+       cl = starDarkColor;
+    }
+    
+    starPoly = new FPoly();
+    starPoly.vertex(0,34);
+    starPoly.vertex(-10,17.2);
+    starPoly.vertex(-30,17.2);
+    starPoly.vertex(-20,0);
+    starPoly.vertex(-30,-17.2);
+    starPoly.vertex(-10,-17.2);
+    starPoly.vertex(0,-34);
+    starPoly.vertex(10,-17.2);
+    starPoly.vertex(30,-17.2);
+    starPoly.vertex(20,0);
+    starPoly.vertex(30,17.2);
+    starPoly.vertex(10,17.2);
+    
+    starPoly.setPosition(center.x, center.y);
+    starPoly.setStatic(true);
+    starPoly.setFillColor(cl);
+    starPoly.setNoStroke(); 
   }
   
-  void display()
+  void display(FWorld world)
   {
-    if (state == true)
-    {
-      //ellipse(black,size);
-    }
-    if (state == false)
-    {
-      //ellipse(white,size);
-    }
+    world.add(starPoly);
+  }
+  
+  void light()
+  {
+    state = true;
+    cl = starLightColor;
+    starPoly.setFillColor(cl);
+  }
+  
+  void dark()
+  {
+    state = false;
+    cl = starDarkColor;
+    starPoly.setFillColor(cl);
   }
 }
 
