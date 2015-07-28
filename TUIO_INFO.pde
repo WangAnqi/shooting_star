@@ -1,10 +1,22 @@
-import TUIO.*;
 
 boolean verbose = false; // print console debug messages
 boolean callback = true; // updates only after callbacks
 
 void addTuioObject(TuioObject tobj) {
   if (verbose) println("add obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+") "+tobj.getX()+" "+tobj.getY()+" "+tobj.getAngle());
+  for(int i = 0; i < objlist.size(); i++)
+  {
+    if (tobj.getSymbolID() == objlist.get(i).location_id)
+    {
+      objlist.get(i).tobj = tobj;
+      objlist.get(i).exist = true;
+    }
+    if (tobj.getSymbolID() == guard.switch_id)
+    {
+      guard.switch_state = true;
+      guard.switch_obj = tobj;
+    }
+  }
 }
 
 // called when an object is moved
@@ -16,6 +28,10 @@ void updateTuioObject (TuioObject tobj) {
 // called when an object is removed from the scene
 void removeTuioObject(TuioObject tobj) {
   if (verbose) println("del obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+")");
+  if (tobj.getSymbolID() == guard.switch_id)
+    {
+      guard.switch_state = false;
+    }
 }
 
 // --------------------------------------------------------------

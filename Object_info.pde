@@ -1,3 +1,5 @@
+// In this case we defined an "adjusted" tuio-object, where we made dx, dy and theta as the adjustment between the object center and the tobj center.
+
 public class Object
   {
     int location_id;
@@ -44,7 +46,7 @@ public class Object
         {
           dis_time = 0;
         }
-        
+        // Then we re-caculate the center.x and center.y based on the tobj.x, tobj.y and dx,dy
         float x = tobj.getScreenX(width);
         float y = tobj.getScreenY(height);
         if(initial)
@@ -52,7 +54,6 @@ public class Object
           current_angle = tobj.getAngle();
           temp_angle = tobj.getAngle();
           adjust.rotate(current_angle);
-          initial = false;
         }
         else
         {
